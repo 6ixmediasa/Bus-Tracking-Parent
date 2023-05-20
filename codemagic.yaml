@@ -3,15 +3,15 @@ workflows:
     name: Build and Test
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
 
     scripts:
       - name: Set up Java
         script: |
-          echo "Installing JDK 8..."
-          apt-get update
-          apt-get install -y openjdk-8-jdk
-          echo "JDK 8 installation completed."
+          echo "Installing OpenJDK 8..."
+          sudo apt-get update
+          sudo apt-get install -y openjdk-8-jdk
+          echo "OpenJDK 8 installation completed."
 
       - name: Verify Java version
         script: |
