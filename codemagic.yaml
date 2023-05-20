@@ -1,9 +1,6 @@
 workflows:
   main:
     name: Build and Test
-    environment:
-      vars:
-        JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
     scripts:
       - name: Set up Java
         script: |
@@ -15,15 +12,16 @@ workflows:
       - name: Verify Java version
         script: |
           echo "Java version:"
-          $JAVA_HOME/bin/java -version
+          java -version
+          javac -version
 
       - name: Build
         script: |
           echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
-          $JAVA_HOME/bin/java -version
-          $JAVA_HOME/bin/javac -version
+          /usr/lib/jvm/java-8-openjdk-amd64/bin/java -version
+          /usr/lib/jvm/java-8-openjdk-amd64/bin/javac -version
           ./gradlew build
           echo "Build completed."
 
@@ -32,7 +30,7 @@ workflows:
           echo "Running tests..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
-          $JAVA_HOME/bin/java -version
-          $JAVA_HOME/bin/javac -version
+          /usr/lib/jvm/java-8-openjdk-amd64/bin/java -version
+          /usr/lib/jvm/java-8-openjdk-amd64/bin/javac -version
           ./gradlew test
           echo "Tests completed."
