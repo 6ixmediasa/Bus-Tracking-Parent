@@ -1,8 +1,11 @@
 workflows:
   build:
-    environment:
+environment:
   vars:
     JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+
+workflows:
+  build:
     scripts:
       - name: Build
         script: |
