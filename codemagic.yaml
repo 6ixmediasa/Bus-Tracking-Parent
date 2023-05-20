@@ -41,6 +41,3 @@ workflows:
           cd $FCI_BUILD_DIR
           cp app/build/outputs/apk/debug/app-debug.apk $FCI_ARTIFACTS_DIR
           echo "APK archived."
-
-    artifacts:
-      - app/build/outputs/apk/debug/app-debug.apk
