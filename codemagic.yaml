@@ -1,5 +1,4 @@
 workflows:
-  version: 2
   build:
     environment:
       vars:
@@ -9,4 +8,4 @@ workflows:
         script: |
           ./gradlew assembleDebug
     artifacts:
-      - build/app/outputs/apk/debug/app-debug.apk
+      - app/build/outputs/apk/debug/app-debug.apk
