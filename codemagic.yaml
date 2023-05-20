@@ -1,12 +1,10 @@
 workflows:
   version: 2
   build:
+    environment:
+      vars:
+        JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
     scripts:
-      - name: Set Java 11
-        script: |
-          echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $HOME/.bashrc
-          source $HOME/.bashrc
-          java -version
       - name: Build
         script: |
           ./gradlew assembleDebug
