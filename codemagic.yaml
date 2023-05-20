@@ -3,14 +3,13 @@ workflows:
     name: Build and Test
     environment:
       variables:
-        - JAVA_HOME: $JAVA_HOME
+        - JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
     scripts:
       - name: Set up Java
         script: |
-          echo "Installing JDK..."
-          curl -s "https://get.sdkman.io" | bash
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install java
+          echo "Installing JDK 8..."
+          apt-get update
+          apt-get install -y openjdk-8-jdk
 
       - name: Build
         script: |
