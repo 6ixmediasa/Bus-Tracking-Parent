@@ -26,7 +26,6 @@ workflows:
           chmod +x gradlew
           ./gradlew build
           ./gradlew build --stacktrace
-          
           echo "Build completed."
 
       - name: Run Tests
