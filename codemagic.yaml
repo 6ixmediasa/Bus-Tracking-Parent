@@ -24,7 +24,6 @@ workflows:
           echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
-          ./gradlew build
           ./gradlew build --stacktrace
           echo "Build completed."
 
