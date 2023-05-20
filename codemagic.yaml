@@ -21,11 +21,11 @@ workflows:
 
       - name: Build
         script: |
-        ./gradlew build --stacktrace
-          echo "Building the Java app..."
+              echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
           ./gradlew build
+          ./gradlew build --stacktrace
           echo "Build completed."
 
       - name: Run Tests
