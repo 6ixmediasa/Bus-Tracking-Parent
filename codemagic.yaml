@@ -12,13 +12,6 @@ workflows:
           apt-get install -y openjdk-8-jdk
           export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-      - name: Update Gradle Wrapper
-        script: |
-          echo "Updating Gradle Wrapper..."
-          cd $FCI_BUILD_DIR
-          chmod +x gradlew
-          ./gradlew wrapper --gradle-version 7.2
-
       - name: Build
         script: |
           echo "Building the Java app..."
