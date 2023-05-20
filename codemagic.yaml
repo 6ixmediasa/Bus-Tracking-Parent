@@ -3,15 +3,15 @@ workflows:
     name: Build and Test
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+        JAVA_HOME: /Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
 
     scripts:
       - name: Set up Java
         script: |
-          echo "Installing OpenJDK 8..."
-          sudo apt-get update
-          sudo apt-get install -y openjdk-8-jdk
-          echo "OpenJDK 8 installation completed."
+          echo "Setting up Java..."
+          export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home
+          export PATH=$JAVA_HOME/bin:$PATH
+          echo "Java setup completed."
 
       - name: Verify Java version
         script: |
@@ -24,8 +24,6 @@ workflows:
           echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
-          export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-          export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew build
           echo "Build completed."
 
@@ -34,8 +32,6 @@ workflows:
           echo "Running tests..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
-          export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-          export PATH=$JAVA_HOME/bin:$PATH
           ./gradlew test
           echo "Tests completed."
 
