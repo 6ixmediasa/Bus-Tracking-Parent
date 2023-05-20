@@ -3,21 +3,22 @@ workflows:
     name: Build and Test
     environment:
       vars:
-        GRADLE_OPTS: -Dorg.gradle.java.home=/usr/lib/jvm/java-8-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
     scripts:
       - name: Set up Java
         script: |
           echo "Installing JDK 8..."
           apt-get update
           apt-get install -y openjdk-8-jdk
-          export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
       - name: Build
         script: |
           echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
+          ./gradlew -version
           ./gradlew build
+          echo "Build completed."
 
       - name: Run Tests
         script: |
@@ -25,3 +26,4 @@ workflows:
           cd $FCI_BUILD_DIR
           chmod +x gradlew
           ./gradlew test
+          echo "Tests completed."
