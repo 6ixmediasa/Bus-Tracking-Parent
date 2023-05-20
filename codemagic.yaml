@@ -1,11 +1,43 @@
 workflows:
-  build:
+  main:
+    name: Build and Test
     environment:
       vars:
-        JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+
     scripts:
+      - name: Set up Java
+        script: |
+          echo "Installing JDK 8..."
+          apt-get update
+          apt-get install -y openjdk-8-jdk
+          echo "JDK 8 installation completed."
+
+      - name: Verify Java version
+        script: |
+          echo "Java version:"
+          java -version
+          javac -version
+
       - name: Build
         script: |
-          ./gradlew assembleDebug
-    artifacts:
-      - app/build/outputs/apk/debug/app-debug.apk
+          echo "Building the Java app..."
+          cd $FCI_BUILD_DIR
+          chmod +x gradlew
+          ./gradlew build
+          echo "Build completed."
+
+      - name: Run Tests
+        script: |
+          echo "Running tests..."
+          cd $FCI_BUILD_DIR
+          chmod +x gradlew
+          ./gradlew test
+          echo "Tests completed."
+
+      - name: Archive APK
+        script: |
+          echo "Archiving APK..."
+          cd $FCI_BUILD_DIR
+          cp app/build/outputs/apk/debug/app-debug.apk $FCI_ARTIFACTS_DIR
+          echo "APK archived."
