@@ -24,6 +24,7 @@ workflows:
           echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
+          export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
           ./gradlew build
           echo "Build completed."
 
@@ -32,6 +33,7 @@ workflows:
           echo "Running tests..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
+          export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
           ./gradlew test
           echo "Tests completed."
 
