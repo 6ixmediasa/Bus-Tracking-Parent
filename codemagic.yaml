@@ -10,7 +10,13 @@ workflows:
           echo "Installing JDK 8..."
           apt-get update
           apt-get install -y openjdk-8-jdk
+          echo "JDK 8 installation completed."
           export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+      - name: Verify Java version
+        script: |
+          echo "Java version:"
+          java -version
 
       - name: Build
         script: |
