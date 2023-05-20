@@ -1,0 +1,25 @@
+workflows:
+  main:
+    name: Build and Test
+    environment:
+      variables:
+        - JAVA_HOME: $JAVA_HOME
+    scripts:
+      - name: Set up Java
+        script: |
+          echo "Installing JDK..."
+          curl -s "https://get.sdkman.io" | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install java
+
+      - name: Build
+        script: |
+          echo "Building the Java app..."
+          cd app
+          ./gradlew build
+
+      - name: Run Tests
+        script: |
+          echo "Running tests..."
+          cd app
+          ./gradlew test
