@@ -21,7 +21,7 @@ workflows:
 
       - name: Build
         script: |
-              echo "Building the Java app..."
+          echo "Building the Java app..."
           cd $FCI_BUILD_DIR
           chmod +x gradlew
           ./gradlew build
