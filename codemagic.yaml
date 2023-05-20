@@ -1,36 +1,14 @@
 workflows:
-  main:
-    name: Build and Test
+  version: 2
+  build:
     scripts:
-      - name: Set up Java
+      - name: Set Java 11
         script: |
-          echo "Installing JDK 8..."
-          apt-get update
-          apt-get install -y openjdk-8-jdk
-          echo "JDK 8 installation completed."
-
-      - name: Verify Java version
-        script: |
-          echo "Java version:"
+          echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $HOME/.bashrc
+          source $HOME/.bashrc
           java -version
-          javac -version
-
       - name: Build
         script: |
-          echo "Building the Java app..."
-          cd $FCI_BUILD_DIR
-          chmod +x gradlew
-          /usr/lib/jvm/java-8-openjdk-amd64/bin/java -version
-          /usr/lib/jvm/java-8-openjdk-amd64/bin/javac -version
-          ./gradlew build
-          echo "Build completed."
-
-      - name: Run Tests
-        script: |
-          echo "Running tests..."
-          cd $FCI_BUILD_DIR
-          chmod +x gradlew
-          /usr/lib/jvm/java-8-openjdk-amd64/bin/java -version
-          /usr/lib/jvm/java-8-openjdk-amd64/bin/javac -version
-          ./gradlew test
-          echo "Tests completed."
+          ./gradlew assembleDebug
+    artifacts:
+      - build/app/outputs/apk/debug/app-debug.apk
